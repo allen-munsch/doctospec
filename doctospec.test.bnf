@@ -1,0 +1,408 @@
+<!-- Testing Configuration (Extended) -->
+
+<testing_config> ::= <testing_keyword> ":"
+                    <indent> <testing_property>+ <dedent>
+
+<testing_keyword> ::= "testing" | "tests" | "test suite" | "specs"
+
+<testing_property> ::= "-"? <test_framework_property>
+                     | "-"? <test_runner_property>
+                     | "-"? <test_coverage_property>
+                     | "-"? <test_suite_definition>
+
+<test_framework_property> ::= <framework_keyword> ":" <test_framework_value>
+
+<test_framework_value> ::= "vitest" | "jest" | "mocha" | "jasmine" | "ava"
+                         | "cypress" | "playwright" | "testing-library"
+                         | "storybook" | "chromatic" | "none"
+
+<test_runner_property> ::= <runner_keyword> ":" <test_runner_value>
+
+<runner_keyword> ::= "runner" | "test runner" | "executor"
+
+<test_runner_value> ::= "vitest" | "jest" | "node" | "tsx" | "bun" | "deno"
+
+<test_coverage_property> ::= <coverage_keyword> ":" <coverage_value>
+
+<coverage_keyword> ::= "coverage" | "code coverage" | "minimum coverage"
+
+<coverage_value> ::= <number> "%" | <coverage_config>
+
+<coverage_config> ::= <indent> <coverage_threshold>+ <dedent>
+
+<coverage_threshold> ::= "-"? <coverage_type> ":" <number> "%"
+
+<coverage_type> ::= "statements" | "branches" | "functions" | "lines"
+
+<!-- Test Suite Definition -->
+
+<test_suite_definition> ::= <suite_keyword> <suite_name>? ":"
+                           <indent> <test_definition>+ <dedent>
+
+<suite_keyword> ::= "suite" | "describe" | "test suite" | "feature"
+
+<suite_name> ::= <quoted_string> | "for" <component_identifier>
+
+<test_definition> ::= <test_keyword> <test_description> ":"
+                     <indent> <test_step>+ <dedent>
+                   | <test_keyword> <test_description> <test_inline>
+
+<test_keyword> ::= "test" | "it" | "scenario" | "case" | "spec"
+
+<test_description> ::= <quoted_string> | <description_text>
+
+<test_inline> ::= <expect_statement>
+
+<!-- Test Steps -->
+
+<test_step> ::= "-"? <setup_step>
+              | "-"? <action_step>
+              | "-"? <expect_step>
+              | "-"? <teardown_step>
+              | "-"? <nested_suite>
+
+<setup_step> ::= <setup_keyword> <setup_action>
+
+<setup_keyword> ::= "setup" | "given" | "before" | "arrange"
+
+<setup_action> ::= <element_state> | <user_context> | <data_fixture>
+
+<element_state> ::= <element_selector> <state_condition>
+
+<user_context> ::= <user_keyword> <is_keyword> <user_state>
+
+<user_keyword> ::= "user" | "visitor" | "admin" | "guest"
+
+<user_state> ::= "logged in" | "authenticated" | "logged out" | "anonymous"
+               | "on" <page_reference>
+               | "at" <url_reference>
+
+<data_fixture> ::= <data_keyword> <fixture_spec>
+
+<data_keyword> ::= "mock" | "stub" | "fixture" | "data"
+
+<fixture_spec> ::= <api_endpoint> <returns_keyword> <mock_data>
+                | <database_query> <returns_keyword> <mock_data>
+                | <variable_name> <equals_keyword> <mock_data>
+
+<action_step> ::= <action_keyword> <user_action>
+
+<action_keyword> ::= "when" | "action" | "do" | "perform" | "act"
+
+<user_action> ::= <interaction_verb> <element_selector> <interaction_value>?
+                | <interaction_verb> <element_selector> <timing_modifier>?
+                | <navigation_action>
+                | <wait_action>
+
+<interaction_verb> ::= "click" | "type" | "select" | "check" | "uncheck"
+                     | "hover" | "focus" | "blur" | "scroll" | "drag"
+                     | "upload" | "submit" | "press" | "double click"
+                     | "right click" | "long press"
+
+<element_selector> ::= <element_type>
+                     | <element_type> <with_keyword> <selector_property>
+                     | <quoted_string>
+                     | <css_selector>
+                     | <test_id_selector>
+
+<selector_property> ::= "text" <quoted_string>
+                      | "label" <quoted_string>
+                      | "placeholder" <quoted_string>
+                      | "id" <quoted_string>
+                      | "class" <quoted_string>
+                      | "role" <quoted_string>
+
+<interaction_value> ::= <quoted_string> | <number> | <key_combination>
+
+<key_combination> ::= <key> ("+" <key>)*
+
+<key> ::= "enter" | "escape" | "tab" | "space" | "shift" | "ctrl" | "cmd" | "alt"
+        | <letter> | <digit>
+
+<navigation_action> ::= <navigate_keyword> <to_keyword> <url_reference>
+                      | <go_keyword> <direction_value>
+
+<navigate_keyword> ::= "navigate" | "go" | "visit" | "open"
+
+<go_keyword> ::= "go" | "navigate"
+
+<direction_value> ::= "back" | "forward" | "home"
+
+<wait_action> ::= <wait_keyword> <wait_condition>
+
+<wait_keyword> ::= "wait" | "pause" | "sleep"
+
+<wait_condition> ::= "for" <duration>
+                   | "for" <element_selector> <to_keyword> <appear_verb>
+                   | "for" <element_selector> <to_keyword> <state_verb>
+                   | "for" <api_call> <to_keyword> <complete_verb>
+                   | "until" <condition>
+
+<duration> ::= <number> <time_unit>
+
+<time_unit> ::= "ms" | "milliseconds" | "s" | "seconds" | "m" | "minutes"
+
+<appear_verb> ::= "appear" | "be visible" | "exist" | "render"
+
+<state_verb> ::= "be enabled" | "be disabled" | "be checked" | "be focused"
+
+<complete_verb> ::= "complete" | "finish" | "resolve"
+
+<expect_step> ::= <expect_keyword> <expectation>
+
+<expect_keyword> ::= "expect" | "assert" | "then" | "should" | "verify"
+
+<expectation> ::= <element_expectation>
+                | <page_expectation>
+                | <api_expectation>
+                | <value_expectation>
+                | <snapshot_expectation>
+
+<element_expectation> ::= <element_selector> <element_matcher>
+
+<element_matcher> ::= <to_keyword>? <be_keyword>? <visibility_matcher>
+                    | <to_keyword>? <have_keyword>? <content_matcher>
+                    | <to_keyword>? <have_keyword>? <attribute_matcher>
+                    | <to_keyword>? <have_keyword>? <state_matcher>
+
+<visibility_matcher> ::= "visible" | "hidden" | "displayed" | "present" | "absent"
+                       | "in viewport" | "on screen"
+
+<content_matcher> ::= "text" <text_value>
+                    | "value" <text_value>
+                    | "count" <number>
+                    | "length" <number>
+
+<attribute_matcher> ::= "attribute" <attribute_name> <attribute_value>?
+                      | "class" <class_value>
+                      | "id" <id_value>
+                      | "href" <url_value>
+                      | "src" <url_value>
+
+<state_matcher> ::= "enabled" | "disabled" | "checked" | "unchecked"
+                  | "focused" | "selected" | "loading" | "error"
+
+<text_value> ::= <quoted_string>
+               | <containing_keyword> <quoted_string>
+               | <matching_keyword> <regex_pattern>
+
+<containing_keyword> ::= "containing" | "with" | "including"
+
+<matching_keyword> ::= "matching" | "that matches"
+
+<regex_pattern> ::= "/" <pattern_text> "/" <regex_flags>?
+
+<page_expectation> ::= <url_keyword> <url_matcher>
+                     | <title_keyword> <text_matcher>
+                     | <to_keyword> <be_keyword> <on_keyword> <page_reference>
+
+<url_keyword> ::= "url" | "current url" | "location"
+
+<url_matcher> ::= <to_keyword> <be_keyword> <url_value>
+                | <to_keyword> <contain_keyword> <url_value>
+                | <to_keyword> <match_keyword> <regex_pattern>
+
+<title_keyword> ::= "page title" | "title" | "document title"
+
+<text_matcher> ::= <to_keyword> <be_keyword> <text_value>
+                 | <to_keyword> <contain_keyword> <text_value>
+
+<api_expectation> ::= <api_endpoint> <api_matcher>
+
+<api_matcher> ::= <to_keyword> <be_keyword> <called_keyword> <call_count>?
+                | <to_keyword> <be_keyword> <called_keyword> <with_keyword> <call_params>
+                | <to_keyword> <return_keyword> <response_value>
+                | <to_keyword> <have_keyword> <status_code>
+
+<called_keyword> ::= "called" | "invoked" | "requested"
+
+<call_count> ::= "once" | "twice" | <number> "times" | "never"
+
+<call_params> ::= <param_spec> ("," <param_spec>)*
+
+<param_spec> ::= <param_name> ":" <param_value>
+
+<response_value> ::= <json_object> | <json_array> | <quoted_string> | <number>
+
+<status_code> ::= "status" <number>
+                | "status" <status_keyword>
+
+<status_keyword> ::= "ok" | "created" | "no content" | "bad request" 
+                   | "unauthorized" | "forbidden" | "not found" | "error"
+
+<value_expectation> ::= <variable_reference> <value_matcher>
+
+<value_matcher> ::= <to_keyword>? <be_keyword>? <comparison_matcher>
+                  | <to_keyword>? <equal_keyword> <expected_value>
+
+<comparison_matcher> ::= <comparator> <expected_value>
+
+<comparator> ::= "greater than" | "less than" | "at least" | "at most"
+               | ">" | "<" | ">=" | "<="
+
+<equal_keyword> ::= "equal" | "be" | "match"
+
+<expected_value> ::= <quoted_string> | <number> | <boolean> | <null_keyword>
+                   | <array_value> | <object_value>
+
+<snapshot_expectation> ::= <to_keyword> <match_keyword> <snapshot_type>
+
+<snapshot_type> ::= "snapshot" | "inline snapshot" | "dom snapshot"
+                  | "accessibility snapshot" | "visual snapshot"
+
+<teardown_step> ::= <teardown_keyword> <cleanup_action>
+
+<teardown_keyword> ::= "cleanup" | "after" | "teardown" | "finally"
+
+<cleanup_action> ::= <restore_keyword> <restore_target>
+                   | <clear_keyword> <clear_target>
+                   | <close_keyword> <close_target>
+
+<restore_keyword> ::= "restore" | "reset"
+
+<restore_target> ::= "mocks" | "stubs" | "database" | "state"
+
+<clear_keyword> ::= "clear" | "remove" | "delete"
+
+<clear_target> ::= "cookies" | "localstorage" | "session" | "cache"
+
+<close_keyword> ::= "close" | "disconnect" | "stop"
+
+<close_target> ::= "browser" | "server" | "connection" | "session"
+
+<!-- Test Configuration & Options -->
+
+<timing_modifier> ::= <with_keyword> <timeout_spec>
+                    | <with_keyword> <retry_spec>
+
+<timeout_spec> ::= "timeout" <duration>
+
+<retry_spec> ::= <retry_count> "retries"
+               | "retry" <retry_count> "times"
+
+<retry_count> ::= <number>
+
+<!-- Nested Suites -->
+
+<nested_suite> ::= <test_suite_definition>
+
+<!-- References -->
+
+<page_reference> ::= <page_name> | <url_reference>
+
+<page_name> ::= <identifier> | <quoted_string>
+
+<url_reference> ::= <quoted_string> | <url_path>
+
+<url_path> ::= "/" <path_segment> ("/" <path_segment>)*
+
+<path_segment> ::= <word> | <param_placeholder>
+
+<param_placeholder> ::= ":" <identifier> | "{" <identifier> "}"
+
+<api_endpoint> ::= <http_method> <api_path>
+
+<http_method> ::= "GET" | "POST" | "PUT" | "PATCH" | "DELETE"
+
+<api_path> ::= "/" <path_segment> ("/" <path_segment>)*
+
+<css_selector> ::= <quoted_string> <starting_with> "." | "#" | "[" | ">"
+
+<test_id_selector> ::= "[data-testid=" <quoted_string> "]"
+                     | "data-testid" <quoted_string>
+
+<variable_reference> ::= <identifier> | <identifier> "." <identifier>
+
+<!-- Mock Data -->
+
+<mock_data> ::= <json_value>
+              | "from" <file_path>
+              | "generated" <generator_type>
+
+<json_value> ::= <json_object> | <json_array> | <json_primitive>
+
+<json_object> ::= "{" <json_pair> ("," <json_pair>)* "}"
+
+<json_pair> ::= <quoted_string> ":" <json_value>
+
+<json_array> ::= "[" <json_value> ("," <json_value>)* "]"
+
+<json_primitive> ::= <quoted_string> | <number> | <boolean> | "null"
+
+<generator_type> ::= "user" | "product" | "order" | <custom_generator>
+
+<custom_generator> ::= <identifier>
+
+<!-- Utilities -->
+
+<be_keyword> ::= "be" | "is"
+
+<have_keyword> ::= "have" | "has" | "contain" | "contains" | "include" | "includes"
+
+<to_keyword> ::= "to" | "should"
+
+<on_keyword> ::= "on" | "at"
+
+<with_keyword> ::= "with"
+
+<is_keyword> ::= "is" | "are"
+
+<returns_keyword> ::= "returns" | "responds with" | "gives"
+
+<equals_keyword> ::= "=" | "equals" | "is"
+
+<contain_keyword> ::= "contain" | "include"
+
+<match_keyword> ::= "match" | "matches"
+
+<return_keyword> ::= "return" | "respond"
+
+<null_keyword> ::= "null" | "nil" | "none"
+
+<attribute_name> ::= <quoted_string>
+
+<attribute_value> ::= <quoted_string>
+
+<class_value> ::= <quoted_string>
+
+<id_value> ::= <quoted_string>
+
+<url_value> ::= <quoted_string>
+
+<param_name> ::= <identifier>
+
+<param_value> ::= <json_value>
+
+<array_value> ::= "[" <expected_value> ("," <expected_value>)* "]"
+
+<object_value> ::= "{" <object_pair> ("," <object_pair>)* "}"
+
+<object_pair> ::= <identifier> ":" <expected_value>
+
+<pattern_text> ::= <any_characters_except_slash>
+
+<regex_flags> ::= <flag_letter>+
+
+<flag_letter> ::= "g" | "i" | "m" | "s" | "u" | "y"
+
+<component_identifier> ::= <identifier>
+
+<condition> ::= <expectation>
+
+<state_condition> ::= <is_keyword> <state_value>
+
+<state_value> ::= "visible" | "hidden" | "enabled" | "disabled" | "loading"
+
+<database_query> ::= "database" | "db" | <table_name>
+
+<table_name> ::= <identifier>
+
+<starting_with> ::= <starts_with_character>
+
+<starts_with_character> ::= <any_character>
+
+<any_characters_except_slash> ::= <character>+
+
+<any_character> ::= <letter> | <digit> | <symbol>
+
+<symbol> ::= "!" | "@" | "#" | "$" | "%" | "^" | "&" | "*" | "(" | ")" | "-" | "+" | "=" | "~" | "`"
