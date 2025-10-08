@@ -1,0 +1,543 @@
+<document> ::= <configuration>? <global_config>? <page_definition>+
+
+<configuration> ::= <config_block>+
+
+<config_block> ::= <framework_config>
+                 | <language_config>
+                 | <styling_config>
+                 | <build_config>
+                 | <state_config>
+                 | <testing_config>
+                 | <directory_config>
+                 | <deploy_config>
+                 | <dependencies_config>
+                 | <environment_config>
+                 | <database_config>
+                 | <api_config>
+                 | <auth_config>
+
+<!-- Framework & Stack Configuration -->
+
+<framework_config> ::= <framework_keyword> ":" <framework_value>
+
+<framework_keyword> ::= "framework" | "stack" | "frontend" | "ui framework"
+
+<framework_value> ::= "react" | "vue" | "svelte" | "angular" | "solid" 
+                    | "next" | "nuxt" | "sveltekit" | "remix" | "astro"
+                    | "html" | "react-native" | "flutter" | "ionic"
+                    | "preact" | "alpine" | "htmx" | "qwik"
+
+<language_config> ::= <language_keyword> ":" <language_value>
+
+<language_keyword> ::= "language" | "lang" | "programming language"
+
+<language_value> ::= "typescript" | "ts" | "javascript" | "js"
+                   | "python" | "dart" | "kotlin" | "swift"
+                   | "go" | "rust" | "java" | "csharp" | "c#"
+
+<styling_config> ::= <styling_keyword> ":" <styling_value>
+
+<styling_keyword> ::= "styling" | "styles" | "css framework" | "ui library"
+
+<styling_value> ::= "tailwind" | "css" | "scss" | "sass" | "less" | "stylus"
+                  | "styled-components" | "emotion" | "css-modules" | "vanilla-extract"
+                  | "bootstrap" | "bulma" | "foundation" | "material-ui" | "mui"
+                  | "chakra" | "mantine" | "antd" | "shadcn" | "daisyui"
+                  | "inline" | "none"
+
+<!-- Build & Development Tools -->
+
+<build_config> ::= <build_keyword> ":" <build_value>
+
+<build_keyword> ::= "build" | "build tool" | "bundler" | "compiler"
+
+<build_value> ::= "vite" | "webpack" | "rollup" | "parcel" | "esbuild"
+                | "turbopack" | "swc" | "babel" | "tsc"
+                | "next" | "nuxt" | "sveltekit" | "remix"
+
+<state_config> ::= <state_keyword> ":" <state_value>
+
+<state_keyword> ::= "state" | "state management" | "store"
+
+<state_value> ::= "zustand" | "redux" | "redux-toolkit" | "mobx" | "recoil"
+                | "jotai" | "valtio" | "xstate" | "pinia" | "context"
+                | "signals" | "tanstack-store" | "effector"
+                | "none" | "local"
+
+<testing_config> ::= <testing_keyword> ":" <testing_value>
+
+<testing_keyword> ::= "testing" | "test framework" | "tests"
+
+<testing_value> ::= "vitest" | "jest" | "mocha" | "jasmine" | "ava"
+                  | "cypress" | "playwright" | "testing-library"
+                  | "storybook" | "chromatic" | "none"
+
+<!-- Directory Structure -->
+
+<directory_config> ::= <directory_keyword> ":"
+                       <indent> <directory_structure>+ <dedent>
+
+<directory_keyword> ::= "directory" | "directory structure" | "folder structure" 
+                      | "project structure" | "file structure"
+
+<directory_structure> ::= "-"? <folder_definition>
+                        | "-"? <file_definition>
+
+<folder_definition> ::= <folder_path> ":"
+                       <indent> <directory_structure>+ <dedent>
+                     | <folder_path> <folder_description>?
+
+<file_definition> ::= <file_path> <file_description>?
+
+<folder_path> ::= <identifier> ("/" <identifier>)*
+
+<file_path> ::= <identifier> ("/" <identifier>)* "." <file_extension>
+
+<file_extension> ::= "ts" | "tsx" | "js" | "jsx" | "vue" | "svelte" 
+                   | "css" | "scss" | "json" | "md" | "html"
+
+<folder_description> ::= "(" <description_text> ")"
+                       | "for" <description_text>
+                       | "containing" <description_text>
+
+<file_description> ::= "(" <description_text> ")"
+                     | "for" <description_text>
+
+<!-- Deployment Configuration -->
+
+<deploy_config> ::= <deploy_keyword> ":"
+                    <indent> <deploy_property>+ <dedent>
+
+<deploy_keyword> ::= "deploy" | "deployment" | "hosting" | "infrastructure"
+
+<deploy_property> ::= "-"? <deploy_platform_property>
+                    | "-"? <deploy_env_property>
+                    | "-"? <deploy_config_property>
+                    | "-"? <deploy_ci_property>
+
+<deploy_platform_property> ::= <platform_keyword> ":" <platform_value>
+
+<platform_keyword> ::= "platform" | "host" | "provider" | "service"
+
+<platform_value> ::= "vercel" | "netlify" | "cloudflare" | "aws" | "azure" | "gcp"
+                   | "heroku" | "railway" | "render" | "fly.io" | "digitalocean"
+                   | "github-pages" | "gitlab-pages" | "self-hosted" | "docker"
+
+<deploy_env_property> ::= <environment_keyword> ":" <environment_list>
+
+<environment_keyword> ::= "environments" | "envs" | "stages"
+
+<environment_list> ::= <environment_value> ("," <environment_value>)*
+
+<environment_value> ::= "development" | "dev" | "staging" | "stage" 
+                      | "production" | "prod" | "preview" | "test"
+
+<deploy_config_property> ::= <deploy_config_key> ":" <deploy_config_value>
+
+<deploy_config_key> ::= "region" | "runtime" | "node version" | "auto deploy"
+                      | "branch" | "domain" | "subdomain" | "ssl" | "cdn"
+
+<deploy_config_value> ::= <word> | <number> | <boolean>
+
+<deploy_ci_property> ::= <ci_keyword> ":" <ci_value>
+
+<ci_keyword> ::= "ci" | "ci/cd" | "pipeline" | "workflow"
+
+<ci_value> ::= "github-actions" | "gitlab-ci" | "circleci" | "jenkins"
+             | "travis" | "bitbucket" | "none"
+
+<!-- Environment Variables -->
+
+<environment_config> ::= <env_keyword> ":"
+                        <indent> <env_variable>+ <dedent>
+
+<env_keyword> ::= "environment" | "env" | "environment variables" | "env vars"
+
+<env_variable> ::= "-"? <env_name> ":" <env_value> <env_scope>?
+                 | "-"? <env_name> <env_scope>? "(" <env_description> ")"
+
+<env_name> ::= <uppercase_identifier>
+
+<env_value> ::= <quoted_string> | <word>
+
+<env_scope> ::= "(" <scope_list> ")"
+
+<scope_list> ::= <scope_value> ("," <scope_value>)*
+
+<scope_value> ::= "development" | "dev" | "production" | "prod" 
+                | "staging" | "test" | "all"
+
+<env_description> ::= <description_text>
+
+<!-- Database Configuration -->
+
+<database_config> ::= <database_keyword> ":"
+                     <indent> <database_property>+ <dedent>
+
+<database_keyword> ::= "database" | "db" | "data store" | "persistence"
+
+<database_property> ::= "-"? <db_type_property>
+                      | "-"? <db_orm_property>
+                      | "-"? <db_connection_property>
+
+<db_type_property> ::= <type_keyword> ":" <db_type_value>
+
+<type_keyword> ::= "type" | "database type" | "db type"
+
+<db_type_value> ::= "postgresql" | "postgres" | "mysql" | "mongodb" | "sqlite"
+                  | "redis" | "dynamodb" | "firestore" | "supabase" | "planetscale"
+                  | "cockroachdb" | "cassandra" | "neo4j" | "none"
+
+<db_orm_property> ::= <orm_keyword> ":" <orm_value>
+
+<orm_keyword> ::= "orm" | "query builder" | "database client"
+
+<orm_value> ::= "prisma" | "drizzle" | "typeorm" | "sequelize" | "mongoose"
+              | "kysely" | "knex" | "sql" | "raw" | "none"
+
+<db_connection_property> ::= <connection_keyword> ":" <connection_value>
+
+<connection_keyword> ::= "connection" | "connection string" | "url"
+
+<connection_value> ::= <quoted_string> | <env_reference>
+
+<env_reference> ::= "$" <env_name> | "${" <env_name> "}"
+
+<!-- API Configuration -->
+
+<api_config> ::= <api_keyword> ":"
+                <indent> <api_property>+ <dedent>
+
+<api_keyword> ::= "api" | "backend" | "server" | "endpoints"
+
+<api_property> ::= "-"? <api_type_property>
+                 | "-"? <api_base_property>
+                 | "-"? <api_client_property>
+                 | "-"? <api_docs_property>
+
+<api_type_property> ::= <type_keyword> ":" <api_type_value>
+
+<api_type_value> ::= "rest" | "graphql" | "grpc" | "websocket" | "trpc"
+                   | "express" | "fastify" | "hono" | "elysia" | "koa"
+
+<api_base_property> ::= <base_keyword> ":" <base_value>
+
+<base_keyword> ::= "base url" | "base" | "endpoint" | "url"
+
+<base_value> ::= <quoted_string> | <env_reference>
+
+<api_client_property> ::= <client_keyword> ":" <client_value>
+
+<client_keyword> ::= "client" | "fetcher" | "http client"
+
+<client_value> ::= "fetch" | "axios" | "ky" | "got" | "tanstack-query"
+                 | "swr" | "apollo" | "urql" | "trpc-client"
+
+<api_docs_property> ::= <docs_keyword> ":" <docs_value>
+
+<docs_keyword> ::= "docs" | "documentation" | "api docs"
+
+<docs_value> ::= "swagger" | "openapi" | "postman" | "redoc" | "scalar" | "none"
+
+<!-- Authentication Configuration -->
+
+<auth_config> ::= <auth_keyword> ":"
+                 <indent> <auth_property>+ <dedent>
+
+<auth_keyword> ::= "auth" | "authentication" | "authorization"
+
+<auth_property> ::= "-"? <auth_provider_property>
+                  | "-"? <auth_strategy_property>
+                  | "-"? <auth_session_property>
+
+<auth_provider_property> ::= <provider_keyword> ":" <provider_value>
+
+<provider_keyword> ::= "provider" | "auth provider" | "service"
+
+<provider_value> ::= "nextauth" | "auth0" | "clerk" | "supabase" | "firebase"
+                   | "cognito" | "okta" | "keycloak" | "passport" | "lucia"
+                   | "better-auth" | "custom" | "none"
+
+<auth_strategy_property> ::= <strategy_keyword> ":" <strategy_list>
+
+<strategy_keyword> ::= "strategies" | "methods" | "providers"
+
+<strategy_list> ::= <strategy_value> ("," <strategy_value>)*
+
+<strategy_value> ::= "email" | "oauth" | "social" | "magic-link" | "sms"
+                   | "google" | "github" | "facebook" | "twitter" | "apple"
+                   | "jwt" | "session" | "api-key"
+
+<auth_session_property> ::= <session_keyword> ":" <session_value>
+
+<session_keyword> ::= "session" | "session storage" | "token storage"
+
+<session_value> ::= "cookie" | "localstorage" | "sessionstorage" | "memory"
+                  | "redis" | "database" | "jwt"
+
+<!-- Dependencies Configuration -->
+
+<dependencies_config> ::= <dependencies_keyword> ":"
+                         <indent> <dependency>+ <dedent>
+
+<dependencies_keyword> ::= "dependencies" | "packages" | "libraries" | "deps"
+
+<dependency> ::= "-"? <package_name> <version_spec>?
+               | "-"? <package_name> "(" <package_description> ")"
+
+<package_name> ::= <identifier> | <scoped_package>
+
+<scoped_package> ::= "@" <identifier> "/" <identifier>
+
+<version_spec> ::= "@" <version_number>
+                 | "@" <version_range>
+                 | "@" "latest"
+                 | "@" "next"
+
+<version_number> ::= <digit>+ "." <digit>+ "." <digit>+
+
+<version_range> ::= "^" <version_number> | "~" <version_number> | ">=" <version_number>
+
+<package_description> ::= <description_text>
+
+<!-- Utilities -->
+
+<boolean> ::= "true" | "false" | "yes" | "no" | "enabled" | "disabled"
+
+<uppercase_identifier> ::= <uppercase_letter> (<uppercase_letter> | "_" | <digit>)*
+
+<uppercase_letter> ::= "A" | "B" | "C" | ... | "Z"
+
+<description_text> ::= <word> (<word> | <punctuation>)*
+
+<punctuation> ::= "," | "." | "!" | "?" | ";" | ":" | "-"
+
+<styles_block> ::= <style_keyword> <scope_phrase>? ":"
+                   <style_property>+
+
+<routes_block> ::= <route_keyword> ":"
+                   <route_definition>+
+
+<components_block> ::= <component_keyword> ":"
+                       <component_definition>+
+
+<page_definition> ::= <creation_verb>? <article>? <page_keyword> <identifier>?
+                      <properties>?
+                      <block>
+
+<block> ::= <indent> <statement>+ <dedent>
+
+<statement> ::= <element_creation>
+              | <conditional_statement>
+              | <loop_statement>
+              | <style_block>
+              | <layout_hint>
+
+<element_creation> ::= <creation_verb>? <article>? <modifiers>* <element_type> <properties>?
+                       <block>?
+
+<conditional_statement> ::= <if_keyword> <condition> <separator>? <action_phrase> <element_creation>
+                          | <action_phrase> <element_creation> <if_keyword> <condition>
+                          | <for_keyword> <condition> <separator>? <action_phrase> <element_creation>
+
+<loop_statement> ::= <for_each_keyword> <iterator> <separator>? <display_keyword> ":"
+                     <block>
+
+<properties> ::= <property_list>
+               | <inline_properties>
+               | <block_properties>
+
+<property_list> ::= "(" <property> ("," <property>)* ")"
+                  | <property> ("," | <and_keyword>)? <property>*
+
+<inline_properties> ::= <property_phrase>+
+
+<block_properties> ::= ":" <indent> <property_statement>+ <dedent>
+
+<property_statement> ::= "-"? <property_phrase>
+                       | <property_name> ":" <property_value>
+
+<property_phrase> ::= <with_keyword> <property_descriptor>
+                    | <property_descriptor>
+                    | <connector>? <property_name> <connector>? <property_value>
+
+<property_descriptor> ::= <property_name> <property_value>?
+                        | <property_value> <property_name>?
+
+<style_block> ::= <styled_keyword> <as_keyword>? ":"
+                  <indent> <style_property>+ <dedent>
+
+<style_property> ::= "-"? <style_name> ":" <style_value> (<responsive_modifier>)?
+                   | "-"? <style_descriptor>
+
+<responsive_modifier> ::= "on" <breakpoint> ("," <style_value> "on" <breakpoint>)*
+
+<layout_hint> ::= "(" <layout_descriptor> ")"
+
+<layout_descriptor> ::= <repeats_keyword> <as_keyword>? <layout_type> <layout_properties>?
+                      | <arranged_keyword> <as_keyword>? <layout_type> <layout_properties>?
+
+<action_binding> ::= <element_type> <label>? <action_verb> <action_handler>
+                   | <element_type> <label>? <going_keyword> <to_keyword> <url>
+                   | <element_type> <label>? "→" <action_handler>
+                   | <element_type> <label>? "→" <url>
+
+<data_binding> ::= <with_keyword> <value_keyword> <variable>
+                 | <value_keyword> <variable>
+                 | <showing_keyword> <variable>
+                 | <from_keyword> <variable>
+
+<condition> ::= <variable> <is_keyword>? <comparator>? <value>
+              | <negation>? <variable>
+              | <variable> <state_keyword>
+
+<iterator> ::= <each_keyword>? <variable> (<in_keyword> <collection>)?
+
+<!-- Lexical Elements -->
+
+<creation_verb> ::= "create" | "add" | "make" | "include" | "put" | "insert" | "build" | "show"
+
+<article> ::= "a" | "an" | "the"
+
+<element_type> ::= "button" | "btn" | "input" | "field" | "form" | "header" | "footer" 
+                 | "section" | "div" | "container" | "card" | "modal" | "drawer" 
+                 | "navigation" | "nav" | "menu" | "list" | "table" | "grid"
+                 | "image" | "img" | "icon" | "text" | "heading" | "title" 
+                 | "paragraph" | "link" | "dropdown" | "select" | "checkbox"
+                 | "radio" | "toggle" | "slider" | "tabs" | "accordion"
+                 | "badge" | "alert" | "toast" | "tooltip" | "popover"
+                 | "carousel" | "gallery" | "avatar" | "spinner" | "loader"
+                 | "breadcrumbs" | "pagination" | "stepper" | "sidebar"
+                 | <custom_element>
+
+<modifiers> ::= <size_modifier> | <color_modifier> | <variant_modifier> | <state_modifier>
+
+<size_modifier> ::= "small" | "sm" | "medium" | "md" | "large" | "lg" | "xlarge" | "xl" 
+                  | "tiny" | "huge" | "full" | "compact"
+
+<color_modifier> ::= "primary" | "secondary" | "accent" | "success" | "error" | "warning"
+                   | "danger" | "info" | "muted" | "light" | "dark"
+                   | <color_name> | <hex_color> | <rgb_color>
+
+<variant_modifier> ::= "outlined" | "filled" | "text" | "ghost" | "link" | "solid"
+
+<state_modifier> ::= "disabled" | "active" | "inactive" | "loading" | "selected" 
+                   | "checked" | "expanded" | "collapsed" | "open" | "closed"
+
+<action_verb> ::= "triggers" | "trigger" | "calls" | "call" | "runs" | "run" 
+                | "executes" | "execute" | "fires" | "fire" | "invokes" | "invoke"
+                | "that triggers" | "which calls" | "triggering" | "calling"
+
+<if_keyword> ::= "if" | "when" | "whenever" | "where"
+
+<for_keyword> ::= "for" | "to"
+
+<for_each_keyword> ::= "for each" | "for every" | "foreach" | "for all"
+
+<display_keyword> ::= "display" | "show" | "render" | "present"
+
+<with_keyword> ::= "with" | "having" | "that has" | "containing" | "includes"
+
+<value_keyword> ::= "value" | "val" | "data"
+
+<going_keyword> ::= "going" | "linking" | "navigating" | "pointing"
+
+<to_keyword> ::= "to" | "at"
+
+<styled_keyword> ::= "styled" | "style" | "appearance" | "design" | "looks"
+
+<as_keyword> ::= "as" | "like"
+
+<repeats_keyword> ::= "repeats" | "repeat" | "repeated"
+
+<arranged_keyword> ::= "arranged" | "laid out" | "organized"
+
+<layout_type> ::= "grid" | "flex" | "stack" | "masonry" | "columns" | "rows"
+
+<connector> ::= "that" | "which" | "and" | "with" | "the" | "is" | "are"
+
+<separator> ::= "," | "then" | ":" | ";"
+
+<and_keyword> ::= "and" | "&" | "+"
+
+<is_keyword> ::= "is" | "equals" | "=="
+
+<in_keyword> ::= "in" | "from" | "of"
+
+<each_keyword> ::= "each" | "every"
+
+<negation> ::= "not" | "no" | "!" | "isn't" | "aren't"
+
+<state_keyword> ::= "authenticated" | "logged in" | "admin" | "active" | "visible" | "enabled"
+
+<showing_keyword> ::= "showing" | "displaying" | "presenting"
+
+<from_keyword> ::= "from" | "of"
+
+<comparator> ::= ">" | "<" | ">=" | "<=" | "==" | "!=" | "is" | "equals"
+
+<style_keyword> ::= "styles" | "styling" | "global styles" | "app styles" | "theme"
+
+<route_keyword> ::= "routes" | "routing" | "pages" | "navigation"
+
+<component_keyword> ::= "components" | "global components" | "reusable" | "definitions"
+
+<page_keyword> ::= "page" | "view" | "screen" | "route"
+
+<scope_phrase> ::= "for this app" | "for the app" | "globally" | "app-wide" | "for all"
+
+<identifier> ::= <word> | <word> <word>+
+
+<label> ::= <quoted_string>
+
+<property_name> ::= <word>
+
+<property_value> ::= <word> | <number> | <quoted_string> | <variable>
+
+<style_name> ::= <word> | <word> <word>+
+
+<style_value> ::= <word> | <number> | <quoted_string> | <color> | <gradient>
+
+<breakpoint> ::= "desktop" | "tablet" | "mobile" | "sm" | "md" | "lg" | "xl"
+
+<action_handler> ::= <identifier>
+
+<url> ::= "/" <path>? | <absolute_url>
+
+<path> ::= <word> ("/" <word>)*
+
+<variable> ::= <identifier> | <identifier> "." <identifier>
+
+<collection> ::= <identifier>
+
+<custom_element> ::= <identifier>
+
+<color_name> ::= "red" | "blue" | "green" | "white" | "black" | "gray" | "grey" | ...
+
+<hex_color> ::= "#" <hex_digit>{6}
+
+<rgb_color> ::= "rgb(" <number> "," <number> "," <number> ")"
+
+<gradient> ::= "gradient" "from" <color> "to" <color> <direction>?
+
+<direction> ::= "top" | "bottom" | "left" | "right" | "to" <direction>
+
+<word> ::= <letter>+
+
+<quoted_string> ::= '"' <character>* '"' | "'" <character>* "'"
+
+<number> ::= <digit>+ ("." <digit>+)? <unit>?
+
+<unit> ::= "px" | "rem" | "em" | "%" | "vh" | "vw" | "ms" | "s"
+
+<letter> ::= "a" | "b" | "c" | ... | "z" | "A" | "B" | "C" | ... | "Z"
+
+<digit> ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+
+<hex_digit> ::= <digit> | "a" | "b" | "c" | "d" | "e" | "f" | "A" | "B" | "C" | "D" | "E" | "F"
+
+<character> ::= <any_printable_character>
+
+<indent> ::= <whitespace_increase>
+
+<dedent> ::= <whitespace_decrease>
