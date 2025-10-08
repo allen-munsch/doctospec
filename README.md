@@ -2,7 +2,13 @@
 
 **A natural language grammar for building user interfaces with LLMs and agents**
 
-DoctoSpec is a flexible, English-like specification language designed for AI-assisted UI development. Write UI specifications naturally, and let LLMs interpret them into working code for any framework. Built for the age of AI agents and conversational development.
+DoctoSpec is a flexible, English-like specification language designed for AI-assisted UI development. 
+
+Write UI specifications naturally, and let LLMs interpret them into working code for any framework. 
+
+Built for the age of AI agents and conversational development.
+
+Add the grammar into the context, or into the project RAG, generate a spec, and share that spec with a site building AI.
 
 ## Philosophy
 
